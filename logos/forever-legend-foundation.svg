@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 140" role="img" aria-label="Forever Legend Foundation">
-  <circle cx="64" cy="70" r="52" fill="#16295E"/>
-  <circle cx="64" cy="70" r="52" fill="none" stroke="#C9A227" stroke-width="3"/>
-  <text x="64" y="85" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700" fill="#C9A227">FL</text>
-  <text x="138" y="64" font-family="Georgia, 'Times New Roman', serif" font-size="32" font-weight="700" fill="#16295E">Forever Legend</text>
-  <text x="139" y="96" font-family="Arial, Helvetica, sans-serif" font-size="17" letter-spacing="7" fill="#C9A227">FOUNDATION</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" role="img" aria-label="Forever Legend Foundation">
+  <circle cx="60" cy="70" r="50" fill="#16295E"/>
+  <circle cx="60" cy="70" r="50" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <text x="60" y="84" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700" fill="#C9A227">FL</text>
+  <text x="128" y="64" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="700" fill="#16295E">Forever Legend</text>
+  <text x="129" y="94" font-family="Arial, Helvetica, sans-serif" font-size="16" letter-spacing="6.5" fill="#C9A227">FOUNDATION</text>
 </svg>
