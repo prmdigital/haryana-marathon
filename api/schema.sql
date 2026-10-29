@@ -67,7 +67,7 @@ INSERT INTO site_settings (setting_key, setting_value) VALUES
   ('earlybird_text2',         '30% OFF till 31 December'),
   ('contact_phone_reg',       '+91 73409 92413'),
   ('contact_phone_general',   '+91 81467 02026'),
-  ('contact_phone_emergency', '+91 73409 92413'),
+  ('contact_phone_emergency', '+91 73411 24861'),
   ('contact_email_reg',       'registration@shaheedbhagatsinghmarathon.com'),
   ('contact_email_info',      'info@shaheedbhagatsinghmarathon.com'),
   ('contact_email_sponsor',   'sponsors@shaheedbhagatsinghmarathon.com')
