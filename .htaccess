@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# SPA + HTTPS config for the Haryana Marathon site.
+# NOTE: set your real production domain below before deploying.
+# The old srsftge.com canonical redirect has been removed so this build
+# does not bounce visitors to the previous event's domain.
+
+# Force HTTPS (uncomment and keep if your host doesn't already do this)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+# Single-page-app fallback: serve index.html for client-side routes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
