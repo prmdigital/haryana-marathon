@@ -1,0 +1,3 @@
+# ID-proof files are private. They are served only through
+# admin/registration_file.php after an admin login. Block all direct access.
+Require all denied

@@ -1,0 +1,16 @@
+# API folder protection
+Options -Indexes
+
+# Block direct web access to source/config files
+<FilesMatch "\.(sql|md|log)$">
+  Require all denied
+</FilesMatch>
+<Files "config.php">
+  Require all denied
+</Files>
+
+# Basic security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bhagat Singh Haryana Marathon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f26a1b"/>
+      <stop offset="1" stop-color="#1f8a3b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <circle cx="40.5" cy="15.5" r="5.3" fill="#fff"/>
+  <g fill="none" stroke="#fff" stroke-width="5.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M39 21 L30 34"/>
+    <path d="M38 24 L49.5 21"/>
+    <path d="M34 27 L23.5 32"/>
+    <polyline points="30,34 39.5,40 35,52.5"/>
+    <polyline points="30,34 21,43.5 27,51.5"/>
+  </g>
+</svg>
