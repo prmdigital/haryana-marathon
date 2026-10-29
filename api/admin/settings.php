@@ -16,6 +16,13 @@ const EDITABLE_KEYS = [
   'earlybird_enabled', 'earlybird_text1', 'earlybird_text2',
   'contact_phone_reg', 'contact_phone_general', 'contact_phone_emergency',
   'contact_email_reg', 'contact_email_info', 'contact_email_sponsor',
+  'contact_phone_sponsor', 'disabled_note',
+  'time_half_assembly', 'time_half_flag', 'time_cross_assembly', 'time_cross_flag',
+  'time_cause_assembly', 'time_cause_flag', 'time_children_assembly', 'time_children_flag',
+  'time_disabled_assembly', 'time_disabled_flag',
+  'time_anthem', 'time_cultural', 'time_awards',
+  'note_health_1', 'note_health_2', 'note_health_3',
+  'note_timing_1', 'note_timing_2', 'note_timing_3',
 ];
 
 $pdo = db();
