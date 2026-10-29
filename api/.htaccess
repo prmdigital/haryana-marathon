@@ -5,9 +5,9 @@ Options -Indexes
 <FilesMatch "\.(sql|md|log)$">
   Require all denied
 </FilesMatch>
-<Files "config.php">
+<FilesMatch "^config.*\.php$">
   Require all denied
-</Files>
+</FilesMatch>
 
 # Basic security headers
 <IfModule mod_headers.c>
