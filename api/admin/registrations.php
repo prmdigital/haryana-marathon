@@ -12,6 +12,7 @@ require_admin();
 
 $q        = clean($_GET['q'] ?? '', 80);
 $category = clean($_GET['category'] ?? '', 40);
+$status   = clean($_GET['status'] ?? '', 16);
 $format   = ($_GET['format'] ?? 'json') === 'csv' ? 'csv' : 'json';
 $page     = max(1, (int)($_GET['page'] ?? 1));
 $per      = min(200, max(1, (int)($_GET['per'] ?? 50)));
@@ -27,13 +28,17 @@ if ($category !== '') {
   $where[] = 'category = ?';
   $args[] = $category;
 }
+if ($status !== '') {
+  $where[] = 'status = ?';
+  $args[] = $status;
+}
 $whereSql = $where ? ('WHERE ' . implode(' AND ', $where)) : '';
 
 $pdo = db();
 
 $cols = 'id, reg_no, full_name, email, mobile, category, category_label, dob, age_on_race_day,
          gender, state, city, tshirt_size, id_proof_type, id_file_path, id_file_name,
-         emergency_phone, free_eligible, created_at';
+         emergency_phone, free_eligible, status, amount_paise, created_at';
 
 if ($format === 'csv') {
   $stmt = $pdo->prepare("SELECT $cols FROM registrations $whereSql ORDER BY created_at DESC");
@@ -42,13 +47,14 @@ if ($format === 'csv') {
   header('Content-Disposition: attachment; filename="registrations-' . date('Y-m-d') . '.csv"');
   $out = fopen('php://output', 'w');
   fputcsv($out, ['Reg No','Name','Email','Mobile','Category','DOB','Age','Gender','State','City',
-                 'T-Shirt','ID Type','Has ID File','Emergency','Free Eligible','Registered At']);
+                 'T-Shirt','ID Type','Has ID File','Emergency','Free Eligible','Status','Amount (Rs)','Registered At']);
   while ($r = $stmt->fetch()) {
     fputcsv($out, [
       $r['reg_no'], $r['full_name'], $r['email'], $r['mobile'], $r['category_label'],
       $r['dob'], $r['age_on_race_day'], $r['gender'], $r['state'], $r['city'],
       $r['tshirt_size'], $r['id_proof_type'], $r['id_file_path'] ? 'Yes' : 'No',
-      $r['emergency_phone'], $r['free_eligible'] ? 'Yes' : 'No', $r['created_at'],
+      $r['emergency_phone'], $r['free_eligible'] ? 'Yes' : 'No',
+      $r['status'], number_format((int)$r['amount_paise'] / 100, 2), $r['created_at'],
     ]);
   }
   fclose($out);
@@ -68,6 +74,7 @@ $rows = $stmt->fetchAll();
 foreach ($rows as &$r) {
   $r['id'] = (int)$r['id'];
   $r['free_eligible'] = (bool)$r['free_eligible'];
+  $r['amount_paise'] = (int)$r['amount_paise'];
   $r['has_id_file'] = !empty($r['id_file_path']);
   unset($r['id_file_path']); // never expose the raw path to the client
 }

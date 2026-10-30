@@ -41,6 +41,11 @@ if (!$declared)                                         $errors[] = 'You must ac
 
 if ($errors) json_err('Please correct the form.', 422, ['errors' => $errors]);
 
+// This endpoint handles FREE registrations only (Disabled category or free-eligible).
+if (!($category === 'disabled' || $freeElig)) {
+  json_err('This category requires online payment.', 400);
+}
+
 // ---- Age on race day (21 March 2027), computed server-side ----------------
 $age = null;
 if (preg_match('/^(\d{2})-(\d{2})-(\d{4})$/', $dob, $m)) {
@@ -87,13 +92,13 @@ try {
     'INSERT INTO registrations
       (reg_no, full_name, email, mobile, category, category_label, dob, age_on_race_day,
        gender, state, city, tshirt_size, id_proof_type, id_file_path, id_file_name,
-       emergency_phone, free_eligible, ip_address)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+       emergency_phone, free_eligible, status, amount_paise, ip_address)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
   );
   $stmt->execute([
     $regNo, $fullName, $email, $mobile, $category, $catLabel, $dob, $age,
     $gender, $state, $city, $tshirt, $idType, $idPath, $idName,
-    ($emergency !== '' ? $emergency : null), $freeElig, client_ip(),
+    ($emergency !== '' ? $emergency : null), $freeElig, 'free', 0, client_ip(),
   ]);
 } catch (Throwable $e) {
   json_err('Could not save your registration. Please try again.', 500);

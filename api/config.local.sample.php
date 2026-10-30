@@ -14,3 +14,10 @@ define('DB_PASS', 'REPLACE_WITH_DB_PASSWORD');
 
 // Any long random string — you'll type it once when running api/setup.php.
 define('SETUP_KEY', 'CHANGE_ME_to_a_long_random_string');
+
+// Razorpay keys (Razorpay Dashboard -> Settings -> API Keys).
+// Start with TEST keys (rzp_test_...); switch to LIVE (rzp_live_...) when ready.
+define('RAZORPAY_KEY_ID', 'PASTE_RAZORPAY_KEY_ID');
+define('RAZORPAY_KEY_SECRET', 'PASTE_RAZORPAY_KEY_SECRET');
+// Optional: set only if you create a Razorpay webhook (recommended for reliability).
+define('RAZORPAY_WEBHOOK_SECRET', '');

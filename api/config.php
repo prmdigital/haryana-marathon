@@ -21,6 +21,11 @@ defined('DB_PASS')        || define('DB_PASS', 'REPLACE_WITH_DB_PASSWORD');
 defined('SETUP_KEY')      || define('SETUP_KEY', 'CHANGE_ME_to_a_long_random_string');
 defined('ALLOWED_ORIGIN') || define('ALLOWED_ORIGIN', '');
 
+// Razorpay payment keys (set these in config.local.php).
+defined('RAZORPAY_KEY_ID')         || define('RAZORPAY_KEY_ID', '');
+defined('RAZORPAY_KEY_SECRET')     || define('RAZORPAY_KEY_SECRET', '');
+defined('RAZORPAY_WEBHOOK_SECRET') || define('RAZORPAY_WEBHOOK_SECRET', '');
+
 // Max ID-proof upload size (bytes) and permitted types.
 define('MAX_UPLOAD_BYTES', 5 * 1024 * 1024); // 5 MB
 $GLOBALS['ALLOWED_UPLOAD_MIME'] = [

@@ -26,11 +26,18 @@ CREATE TABLE IF NOT EXISTS registrations (
   id_file_name    VARCHAR(255) NULL,       -- original filename
   emergency_phone VARCHAR(15)  NULL,
   free_eligible   TINYINT(1)   NOT NULL DEFAULT 0,
+  status          VARCHAR(16)  NOT NULL DEFAULT 'free',   -- free | pending | paid | failed
+  amount_paise    INT          NOT NULL DEFAULT 0,
+  razorpay_order_id   VARCHAR(40) NULL,
+  razorpay_payment_id VARCHAR(40) NULL,
+  paid_at         TIMESTAMP    NULL,
   ip_address      VARCHAR(45)  NULL,
   created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX idx_created (created_at),
   INDEX idx_category (category),
-  INDEX idx_email (email)
+  INDEX idx_email (email),
+  INDEX idx_status (status),
+  INDEX idx_order (razorpay_order_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ---------------------------------------------------------------------------
