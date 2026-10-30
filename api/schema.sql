@@ -132,5 +132,17 @@ INSERT INTO site_settings (setting_key, setting_value) VALUES
   ('cat_disabled_distance',   '1'),
   ('cat_disabled_live',       ''),
   ('cat_disabled_tags',       'Open for all age groups (M/W)'),
-  ('cat_disabled_ages',       'Differently-abled participants')
+  ('cat_disabled_ages',       'Differently-abled participants'),
+  ('race_title_main',         'Race Categories &'),
+  ('race_title_accent',       'Route'),
+  ('race_subtitle',           'Choose your challenge and run for a cause. All races start from Tau Devi Lal Stadium, Panchkula.'),
+  ('label_age_categories',    'Age Categories:'),
+  ('label_assembly',          'Assembly Time:'),
+  ('label_flagoff',           'Flag-off:'),
+  ('tribute_eyebrow',         'Shaheed-E-Azam Bhagat Singh Ji'),
+  ('tribute_heading',         'Honour the Sacrifice. Empower the Youth. Build a Drug-Free India.'),
+  ('route_eyebrow',           'The Course'),
+  ('route_title_main',        'Route Plan for the Shaheed-E-Azam Bhagat Singh'),
+  ('route_title_accent',      'Haryana Marathon'),
+  ('route_subtitle',          'Every race starts and finishes at Tau Devi Lal Stadium, Panchkula.')
 ON DUPLICATE KEY UPDATE setting_key = setting_key; -- never overwrite edited values

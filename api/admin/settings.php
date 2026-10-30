@@ -29,6 +29,10 @@ const EDITABLE_KEYS = [
   'cat_cause_name', 'cat_cause_subtitle', 'cat_cause_distance', 'cat_cause_live', 'cat_cause_tags', 'cat_cause_ages',
   'cat_children_name', 'cat_children_subtitle', 'cat_children_distance', 'cat_children_live', 'cat_children_tags', 'cat_children_ages',
   'cat_disabled_name', 'cat_disabled_subtitle', 'cat_disabled_distance', 'cat_disabled_live', 'cat_disabled_tags', 'cat_disabled_ages',
+  'race_title_main', 'race_title_accent', 'race_subtitle',
+  'label_age_categories', 'label_assembly', 'label_flagoff',
+  'tribute_eyebrow', 'tribute_heading',
+  'route_eyebrow', 'route_title_main', 'route_title_accent', 'route_subtitle',
 ];
 
 $pdo = db();
