@@ -23,7 +23,8 @@ if ($d['category'] === 'disabled' || $d['freeEligible']) {
 
 $amount = fee_paise($d['category']);
 // Auto-apply the current early-bird discount (server-side, never trust the client).
-$pct = early_bird_pct();
+// Early-bird applies ONLY to 21 KM (half) and 10 KM (timed).
+$pct = in_array($d['category'], ['half', 'timed'], true) ? early_bird_pct() : 0;
 if ($pct > 0) $amount = (int)round($amount * (100 - $pct) / 100);
 if ($amount < 100) json_err('This category does not require online payment.', 400);
 
