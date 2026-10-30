@@ -77,6 +77,22 @@ function fee_paise(string $category): int {
   return $rupees * 100;
 }
 
+/** Current early-bird discount % based on today's date (0 if none active). */
+function early_bird_pct(): int {
+  $keys = "'earlybird_enabled','earlybird_tier1_pct','earlybird_tier1_until','earlybird_tier2_pct','earlybird_tier2_until'";
+  $s = [];
+  foreach (db()->query("SELECT setting_key, setting_value FROM site_settings WHERE setting_key IN ($keys)")->fetchAll() as $r) {
+    $s[$r['setting_key']] = $r['setting_value'];
+  }
+  if (($s['earlybird_enabled'] ?? '1') === '0') return 0;
+  $today = date('Y-m-d');
+  $p1 = (int)($s['earlybird_tier1_pct'] ?? 0); $u1 = (string)($s['earlybird_tier1_until'] ?? '');
+  $p2 = (int)($s['earlybird_tier2_pct'] ?? 0); $u2 = (string)($s['earlybird_tier2_until'] ?? '');
+  if ($u1 !== '' && $today <= $u1 && $p1 > 0) return $p1;
+  if ($u2 !== '' && $today <= $u2 && $p2 > 0) return $p2;
+  return 0;
+}
+
 function new_reg_no(PDO $pdo): string {
   for ($i = 0; $i < 6; $i++) {
     $c = 'HM27-' . random_int(100000, 999999);

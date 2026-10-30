@@ -14,6 +14,7 @@ const EDITABLE_KEYS = [
   'countdown_target', 'registration_open_label',
   'fee_half', 'fee_cross', 'fee_cause', 'fee_children',
   'earlybird_enabled', 'earlybird_text1', 'earlybird_text2',
+  'earlybird_tier1_pct', 'earlybird_tier1_until', 'earlybird_tier2_pct', 'earlybird_tier2_until',
   'contact_phone_reg', 'contact_phone_general', 'contact_phone_emergency',
   'contact_email_reg', 'contact_email_info', 'contact_email_sponsor',
   'contact_phone_sponsor', 'disabled_note',
