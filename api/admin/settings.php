@@ -24,6 +24,11 @@ const EDITABLE_KEYS = [
   'time_anthem', 'time_cultural', 'time_awards',
   'note_health_1', 'note_health_2', 'note_health_3',
   'note_timing_1', 'note_timing_2', 'note_timing_3',
+  'cat_half_name', 'cat_half_subtitle', 'cat_half_distance', 'cat_half_live', 'cat_half_tags', 'cat_half_ages',
+  'cat_cross_name', 'cat_cross_subtitle', 'cat_cross_distance', 'cat_cross_live', 'cat_cross_tags', 'cat_cross_ages',
+  'cat_cause_name', 'cat_cause_subtitle', 'cat_cause_distance', 'cat_cause_live', 'cat_cause_tags', 'cat_cause_ages',
+  'cat_children_name', 'cat_children_subtitle', 'cat_children_distance', 'cat_children_live', 'cat_children_tags', 'cat_children_ages',
+  'cat_disabled_name', 'cat_disabled_subtitle', 'cat_disabled_distance', 'cat_disabled_live', 'cat_disabled_tags', 'cat_disabled_ages',
 ];
 
 $pdo = db();
