@@ -15,6 +15,7 @@ $free   = (int) $pdo->query('SELECT COUNT(*) FROM registrations WHERE free_eligi
 $withId = (int) $pdo->query("SELECT COUNT(*) FROM registrations WHERE id_file_path IS NOT NULL AND id_file_path <> ''")->fetchColumn();
 $paid      = (int) $pdo->query("SELECT COUNT(*) FROM registrations WHERE status = 'paid'")->fetchColumn();
 $pending   = (int) $pdo->query("SELECT COUNT(*) FROM registrations WHERE status = 'pending'")->fetchColumn();
+$refunded  = (int) $pdo->query("SELECT COUNT(*) FROM registrations WHERE status = 'refunded'")->fetchColumn();
 $collected = (int) $pdo->query("SELECT COALESCE(SUM(amount_paise),0) FROM registrations WHERE status = 'paid'")->fetchColumn();
 
 $cat = [];
@@ -24,6 +25,6 @@ foreach ($pdo->query('SELECT category, COUNT(*) n FROM registrations GROUP BY ca
 
 json_out([
   'ok'    => true,
-  'stats' => compact('total', 'today', 'week', 'free', 'withId', 'paid', 'pending', 'collected'),
+  'stats' => compact('total', 'today', 'week', 'free', 'withId', 'paid', 'pending', 'refunded', 'collected'),
   'byCategory' => $cat,
 ]);
