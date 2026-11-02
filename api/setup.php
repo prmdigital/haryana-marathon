@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->prepare('UPDATE admin_users SET password_hash = ? WHERE username = ?')
             ->execute([password_hash($pass, PASSWORD_DEFAULT), $user]);
       } else {
-        $pdo->prepare('INSERT INTO admin_users (username, password_hash) VALUES (?, ?)')
-            ->execute([$user, password_hash($pass, PASSWORD_DEFAULT)]);
+        $pdo->prepare('INSERT INTO admin_users (username, password_hash, role) VALUES (?, ?, ?)')
+            ->execute([$user, password_hash($pass, PASSWORD_DEFAULT), 'super']);
       }
       if (!is_dir(UPLOAD_DIR)) @mkdir(UPLOAD_DIR, 0755, true);
       $done = true;

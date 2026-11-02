@@ -10,7 +10,7 @@ require_once __DIR__ . '/../lib/auth.php';
 require_once __DIR__ . '/../lib/db.php';
 
 require_method('POST');
-require_admin();
+require_role(['super', 'manager']); // viewers cannot issue refunds
 require_csrf();
 
 if (RAZORPAY_KEY_ID === '' || RAZORPAY_KEY_SECRET === '') {

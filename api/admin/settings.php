@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 require_method('POST');
+require_role(['super', 'manager']); // viewers cannot edit content
 require_csrf();
 
 $in = read_json_body();
