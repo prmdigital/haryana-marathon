@@ -37,6 +37,7 @@ if ($state === '')                                      $errors[] = 'Please sele
 if ($city === '')                                       $errors[] = 'City is required.';
 if ($tshirt === '')                                     $errors[] = 'Please select a T-shirt size.';
 if ($idType === '')                                     $errors[] = 'Please select an ID proof type.';
+if (!preg_match('/^\d{10}$/', $emergency))              $errors[] = 'A valid 10-digit emergency contact number is required.';
 if (!$declared)                                         $errors[] = 'You must accept the declaration.';
 
 if ($errors) json_err('Please correct the form.', 422, ['errors' => $errors]);

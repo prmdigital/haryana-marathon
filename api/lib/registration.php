@@ -33,6 +33,7 @@ function collect_registration(): array {
   if ($d['city'] === '')                                  $e[] = 'City is required.';
   if ($d['tshirt'] === '')                                $e[] = 'Please select a T-shirt size.';
   if ($d['idType'] === '')                                $e[] = 'Please select an ID proof type.';
+  if (!preg_match('/^\d{10}$/', $d['emergency']))         $e[] = 'A valid 10-digit emergency contact number is required.';
   if (!$d['declared'])                                    $e[] = 'You must accept the declaration.';
   return [$d, $e];
 }
