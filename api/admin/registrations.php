@@ -76,8 +76,23 @@ foreach ($rows as &$r) {
   $r['free_eligible'] = (bool)$r['free_eligible'];
   $r['amount_paise'] = (int)$r['amount_paise'];
   $r['has_id_file'] = !empty($r['id_file_path']);
+  $r['has_free_doc'] = false;
   unset($r['id_file_path']); // never expose the raw path to the client
 }
 unset($r);
+
+// Flag which rows carry a free-eligibility document (resilient if the column is new).
+try {
+  $ids = array_column($rows, 'id');
+  if ($ids) {
+    $ph = implode(',', array_fill(0, count($ids), '?'));
+    $fdStmt = $pdo->prepare("SELECT id, free_doc_path FROM registrations WHERE id IN ($ph)");
+    $fdStmt->execute($ids);
+    $hasFree = [];
+    foreach ($fdStmt->fetchAll() as $fr) $hasFree[(int)$fr['id']] = !empty($fr['free_doc_path']);
+    foreach ($rows as &$r) $r['has_free_doc'] = $hasFree[(int)$r['id']] ?? false;
+    unset($r);
+  }
+} catch (Throwable $e) { /* free_doc column not present yet */ }
 
 json_out(['ok' => true, 'total' => $total, 'page' => $page, 'per' => $per, 'rows' => $rows]);

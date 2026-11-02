@@ -47,6 +47,11 @@ if (!($category === 'disabled' || $freeElig)) {
   json_err('This category requires online payment.', 400);
 }
 
+// Free registrations must attach a document proving eligibility.
+if (empty($_FILES['freeDocFile']) || ($_FILES['freeDocFile']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+  json_err('Please upload a document proving your free-registration eligibility.', 422);
+}
+
 // ---- Age on race day (21 March 2027), computed server-side ----------------
 $age = null;
 if (preg_match('/^(\d{2})-(\d{2})-(\d{4})$/', $dob, $m)) {
@@ -76,6 +81,24 @@ if (!empty($_FILES['idFile']) && ($_FILES['idFile']['error'] ?? UPLOAD_ERR_NO_FI
   $idPath = $fname;
 }
 
+// ---- Handle the required free-eligibility document ------------------------
+$freeDocPath = null; $freeDocName = null;
+{
+  $f = $_FILES['freeDocFile'];
+  if ($f['size'] > MAX_UPLOAD_BYTES) json_err('Eligibility document must be 5 MB or smaller.', 422);
+  $finfo = new finfo(FILEINFO_MIME_TYPE);
+  $mime = $finfo->file($f['tmp_name']);
+  $allowed = $GLOBALS['ALLOWED_UPLOAD_MIME'];
+  if (!isset($allowed[$mime])) json_err('Eligibility document must be a JPG, PNG, WebP or PDF.', 422);
+  if (!is_dir(UPLOAD_DIR)) @mkdir(UPLOAD_DIR, 0755, true);
+  $freeDocName = clean($f['name'], 255);
+  $fname2 = date('Ymd') . '_' . bin2hex(random_bytes(8)) . '.' . $allowed[$mime];
+  if (!move_uploaded_file($f['tmp_name'], UPLOAD_DIR . '/' . $fname2)) {
+    json_err('Could not save the uploaded document. Please try again.', 500);
+  }
+  $freeDocPath = $fname2;
+}
+
 // ---- Unique registration number -------------------------------------------
 $pdo = db();
 $regNo = '';
@@ -93,13 +116,13 @@ try {
     'INSERT INTO registrations
       (reg_no, full_name, email, mobile, category, category_label, dob, age_on_race_day,
        gender, state, city, tshirt_size, id_proof_type, id_file_path, id_file_name,
-       emergency_phone, free_eligible, status, amount_paise, ip_address)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+       emergency_phone, free_eligible, status, amount_paise, ip_address, free_doc_path, free_doc_name)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
   );
   $stmt->execute([
     $regNo, $fullName, $email, $mobile, $category, $catLabel, $dob, $age,
     $gender, $state, $city, $tshirt, $idType, $idPath, $idName,
-    ($emergency !== '' ? $emergency : null), $freeElig, 'free', 0, client_ip(),
+    ($emergency !== '' ? $emergency : null), $freeElig, 'free', 0, client_ip(), $freeDocPath, $freeDocName,
   ]);
 } catch (Throwable $e) {
   json_err('Could not save your registration. Please try again.', 500);

@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS registrations (
   id_proof_type   VARCHAR(40)  NOT NULL,
   id_file_path    VARCHAR(255) NULL,       -- relative path inside uploads/
   id_file_name    VARCHAR(255) NULL,       -- original filename
+  free_doc_path   VARCHAR(255) NULL,       -- free-eligibility document (path inside uploads/)
+  free_doc_name   VARCHAR(255) NULL,       -- free-eligibility document original filename
   emergency_phone VARCHAR(15)  NULL,
   free_eligible   TINYINT(1)   NOT NULL DEFAULT 0,
   status          VARCHAR(16)  NOT NULL DEFAULT 'free',   -- free | pending | paid | failed
