@@ -30,6 +30,7 @@ if ($amount < 100) json_err('This category does not require online payment.', 40
 
 [$idPath, $idName, $idErr] = store_id_file();
 if ($idErr) json_err($idErr, 422);
+if ($idPath === null) json_err('Please upload a photo ID proof to register.', 422);
 
 $age = age_on_race_day_from($d['dob']);
 $pdo = db();

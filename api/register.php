@@ -80,6 +80,7 @@ if (!empty($_FILES['idFile']) && ($_FILES['idFile']['error'] ?? UPLOAD_ERR_NO_FI
   }
   $idPath = $fname;
 }
+if ($idPath === null) json_err('Please upload a photo ID proof to register.', 422);
 
 // ---- Handle the required free-eligibility document ------------------------
 $freeDocPath = null; $freeDocName = null;
